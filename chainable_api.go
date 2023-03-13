@@ -82,6 +82,17 @@ func (db *DB) Table(name string, args ...interface{}) (tx *DB) {
 		tx.Statement.TableExpr = nil
 		tx.Statement.Table = ""
 	}
+
+	return
+}
+
+func (db *DB) ResetSQLContext() (tx *DB) {
+	tx = db.getInstance()
+	for k, _ := range tx.Statement.Clauses {
+		tx.Statement.Clauses[k] = clause.Clause{
+			Name: k,
+		}
+	}
 	return
 }
 
