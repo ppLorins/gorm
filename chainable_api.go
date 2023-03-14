@@ -88,11 +88,12 @@ func (db *DB) Table(name string, args ...interface{}) (tx *DB) {
 
 func (db *DB) ResetSQLContext() (tx *DB) {
 	tx = db.getInstance()
-	for k, _ := range tx.Statement.Clauses {
-		tx.Statement.Clauses[k] = clause.Clause{
-			Name: k,
-		}
-	}
+	tx.Statement.Clauses = map[string]clause.Clause{}
+	//for k, _ := range tx.Statement.Clauses {
+	//	tx.Statement.Clauses[k] = clause.Clause{
+	//		Name: k,
+	//	}
+	//}
 	return
 }
 
